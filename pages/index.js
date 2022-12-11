@@ -1,17 +1,30 @@
+import Link from 'next/link'
 import { client } from "../libs/client";
 
-export default function Home({ blog }) {
+export default function Home({ blogs }) {
   return (
     <div>
-      <ul>
-        {blog.map((blog) => (
-          <li key={blog.id}>
-            <div>{blog.title}</div>
-            <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-          </li>
-        ))}
+      <h1 className="text-2xl font-bold text-center my-2.5">記事一覧</h1>
+      <ul className="flex flex-wrap justify-between after:content-[''] after:w-72">
+        {blogs.map((blog) => {
+
+          const blogId = blog.id;
+          const blogEyecatchUrl = blog.eyecatch ? blog.eyecatch.url : "";
+          const blogTitle = blog.title;
+
+          return (
+            <li key={blogId} className="border w-72 p-1.5 mb-1.5" >
+              <Link href={`/blog/${blogId}`}>
+                {
+                  blogEyecatchUrl ? <img src={blogEyecatchUrl} className="max-w-full border" /> : null
+                }
+                <h2 className="font-bold">{blogTitle}</h2>
+              </Link>
+            </li>
+          )
+        })}
       </ul>
-    </div>
+    </div >
   );
 }
 
@@ -21,7 +34,7 @@ export const getStaticProps = async () => {
   console.log(data)
   return {
     props: {
-      blog: data.contents,
+      blogs: data.contents,
     },
   };
 };
