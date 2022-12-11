@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { client } from "../libs/client";
 
 export default function Home({ blogs }) {
@@ -16,7 +17,7 @@ export default function Home({ blogs }) {
             <li key={blogId} className="border w-72 p-1.5 mb-1.5" >
               <Link href={`/blog/${blogId}`}>
                 {
-                  blogEyecatchUrl ? <img src={blogEyecatchUrl} className="max-w-full border" /> : null
+                  blogEyecatchUrl ? <Image src={blogEyecatchUrl} className="max-w-full border" alt={blogTitle} /> : null
                 }
                 <h2 className="font-bold">{blogTitle}</h2>
               </Link>
