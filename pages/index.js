@@ -16,9 +16,11 @@ export default function Home({ blogs }) {
           return (
             <li key={blogId} className="border w-72 p-1.5 mb-1.5" >
               <Link href={`/blog/${blogId}`}>
-                {
-                  blogEyecatchUrl ? <Image src={blogEyecatchUrl} className="max-w-full border" alt={blogTitle} /> : null
-                }
+                <div className="border">
+                  {
+                    blogEyecatchUrl ? <Image className="w-full h-auto" src={blogEyecatchUrl} alt={blogTitle} width={200} height={100} /> : null
+                  }
+                </div>
                 <h2 className="font-bold">{blogTitle}</h2>
               </Link>
             </li>
